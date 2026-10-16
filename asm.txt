@@ -1,0 +1,15 @@
+PUSH 10
+POP AX ; goydaaaaaaaa kdfdf
+:1
+    PUSH AX
+    PUSH AX
+    MUL
+    OUT
+    PUSH AX
+    PUSH 1
+    SUB
+    POP AX
+    PUSH 0
+    PUSH AX
+    JB 1
+HLT
