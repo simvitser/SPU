@@ -17,6 +17,8 @@ long get_register_number(const char* arg);
 
 int get_arg(char *arg, const char *buffer);
 
+void delete_comments(char *comment_ptr);
+
 int main(const int argc, const char *argv[]) {
     if (argc <= 1) {
         printfError("no file\n");
@@ -32,13 +34,7 @@ int main(const int argc, const char *argv[]) {
         return 1;
     }
     
-    char *comment_ptr = NULL;
-    while ((comment_ptr = strchr(buffer, ';')) != NULL) {
-        while (*comment_ptr != '\n' && *comment_ptr != '\0') {
-            *comment_ptr = ' ';
-            comment_ptr++;
-        }
-    }
+    delete_comments(buffer); 
 
     FILE *file = fopen("asm.bin", "wb");
     if (file == NULL) {
@@ -46,7 +42,6 @@ int main(const int argc, const char *argv[]) {
         return 1;
     }
 
-    // printf("%s", buffer);
     printfOK("start compile\n");
     long code[MAX_CODE_LEN] = {};
     long *code_ptr = code;
@@ -262,4 +257,14 @@ int get_arg(char *arg, const char *buffer) {
 	if (sscanf(buffer, "%s%n", arg, &arglen) != 1) return -1;
 	while (buffer[arglen] == ' ') arglen++;
 	return arglen;
+}
+
+void delete_comments(char *comment_ptr) {
+    while (*comment_ptr != '\0') {
+        while (*comment_ptr != ';') comment_ptr++;
+        while (*comment_ptr != '\n' && *comment_ptr != '\0') {
+            *comment_ptr = ' ';
+            comment_ptr++;
+        }
+    }
 }

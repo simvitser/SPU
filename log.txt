@@ -1,21 +1,246 @@
-[stack.c   ] [42  ] [_stackCtor                 ] [21:47:09] [ INFO] ->  Init a stack 0x7b82614f0038
-[stack.c   ] [88  ] [_stackCtor                 ] [21:47:09] [   OK] ->  succes init stack (nil)
-[stack.c   ] [170 ] [stackPush                  ] [21:47:09] [ INFO] ->  push el: 10 to 0x7b82614f0038
-[stack.c   ] [187 ] [stackPush                  ] [21:47:09] [   OK] ->  succesful push
-[stack.c   ] [170 ] [stackPush                  ] [21:47:09] [ INFO] ->  push el: 0 to 0x7b82614f0038
-[stack.c   ] [187 ] [stackPush                  ] [21:47:09] [   OK] ->  succesful push
-[stack.c   ] [170 ] [stackPush                  ] [21:47:09] [ INFO] ->  push el: 0 to 0x7b82614f0038
-[stack.c   ] [384 ] [stackResize                ] [21:47:09] [ INFO] ->  resize a stack 0x7b82614f0038 to size 4
-[stack.c   ] [187 ] [stackPush                  ] [21:47:09] [   OK] ->  succesful push
-[stack.c   ] [204 ] [stackPop                   ] [21:47:09] [ INFO] ->  pop el: 0 from stack 0x7b82614f0038
-[stack.c   ] [204 ] [stackPop                   ] [21:47:09] [ INFO] ->  pop el: 0 from stack 0x7b82614f0038
-[stack.c   ] [384 ] [stackResize                ] [21:47:09] [ INFO] ->  resize a stack 0x7b82614f0038 to size 2
-[stack.c   ] [170 ] [stackPush                  ] [21:47:09] [ INFO] ->  push el: 0 to 0x7b82614f0038
-[stack.c   ] [187 ] [stackPush                  ] [21:47:09] [   OK] ->  succesful push
-[stack.c   ] [204 ] [stackPop                   ] [21:47:09] [ INFO] ->  pop el: 0 from stack 0x7b82614f0038
-[stack.c   ] [170 ] [stackPush                  ] [21:47:09] [ INFO] ->  push el: 0 to 0x7b82614f0038
-[stack.c   ] [187 ] [stackPush                  ] [21:47:09] [   OK] ->  succesful push
-[stack.c   ] [170 ] [stackPush                  ] [21:47:09] [ INFO] ->  push el: 1 to 0x7b82614f0038
-[stack.c   ] [384 ] [stackResize                ] [21:47:09] [ INFO] ->  resize a stack 0x7b82614f0038 to size 4
-[stack.c   ] [187 ] [stackPush                  ] [21:47:09] [   OK] ->  succesful push
-[stack.c   ] [260 ] [stackDtor                  ] [21:47:09] [ INFO] ->  destroy stack 0x7b82614f0038
+[stack.c   ] [42  ] [_stackCtor                 ] [00:30:26] [ INFO] ->  Init a stack 0x7b792d0f0038
+[stack.c   ] [88  ] [_stackCtor                 ] [00:30:26] [   OK] ->  succes init stack (nil)
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 10 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 10 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 10 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 10 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 10 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 10 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 100 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 100 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 10 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 10 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 9 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 9 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 9 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 9 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 9 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 9 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 9 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 9 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 81 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 81 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 9 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 9 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 8 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 8 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 8 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 8 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 8 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 8 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 8 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 8 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 64 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 64 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 8 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 8 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 7 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 7 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 7 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 7 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 7 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 7 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 7 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 7 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 49 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 49 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 7 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 7 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 6 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 6 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 6 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 6 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 6 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 6 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 6 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 6 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 36 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 36 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 6 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 6 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 5 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 5 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 5 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 5 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 5 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 5 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 5 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 5 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 25 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 25 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 5 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 5 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 4 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 4 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 4 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 4 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 4 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 4 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 4 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 4 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 16 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 16 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 4 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 4 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 3 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 3 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 3 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 3 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 3 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 3 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 3 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 3 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 9 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 9 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 3 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 3 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 2 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 2 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 2 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 2 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 2 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 2 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 2 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 2 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 4 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 4 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 2 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 2 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 1 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 1 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [170 ] [stackPush                  ] [00:30:26] [ INFO] ->  push el: 0 to 0x7b792d0f0038
+[stack.c   ] [187 ] [stackPush                  ] [00:30:26] [   OK] ->  succesful push
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [204 ] [stackPop                   ] [00:30:26] [ INFO] ->  pop el: 0 from stack 0x7b792d0f0038
+[stack.c   ] [260 ] [stackDtor                  ] [00:30:26] [ INFO] ->  destroy stack 0x7b792d0f0038

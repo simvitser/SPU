@@ -49,7 +49,7 @@ ErrorStatusSpu spuRun(spu_t *spu) {
             case HLT:
                 return SPU_OK;
                 break;
-	        case PUSH:  spuPUSH  (spu);  spu->ip += 2; break; // moveip(2);
+	        case PUSH:  spuPUSH  (spu);  break; // moveip(2);
 	        case PUSHR: spuPUSHR (spu);  break;
             case POP:   spuPOP   (spu);  break;
             case ADD:   spuADD   (spu);  break;
