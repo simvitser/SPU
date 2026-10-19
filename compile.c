@@ -217,10 +217,8 @@ int main(const int argc, const char *argv[]) {
 	            break;
         }
     }
-
-    for (size_t i = 0; i < (code_ptr - code) * 8; i++) {
-        fprintf(file, "%c", ((char*)code)[i]);
-    }
+ 
+    fwrite(code, sizeof(long), code_ptr - code, file);
 
     DEBUG {
         for (size_t i = 0; i < code_ptr - code; i++) {
