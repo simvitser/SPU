@@ -1,3 +1,5 @@
+#define DEBUG if (1)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +11,23 @@
 
 #define MAX_CODE_LEN 10000
 #define MAX_ARG_LEN  100
+#define MAX_TAG_LEN  100
 #define MAX_TAGS     1000
+
+#define GET_ARG(CMD) \
+shift = get_arg(arg, buffer); \
+if (shift == -1) { \
+    printfError("no arg " CMD ": %s\n", arg); \
+    return 1; \
+} \
+buffer += shift; \
+NO_ARG(CMD);
+
+#define NO_ARG(CMD) \
+if (*buffer != '\n') { \
+    printfError("too much args at " CMD "\n"); \
+    return 1; \
+}
 
 command_t parse_command(const char *command_now);
 
@@ -18,6 +36,8 @@ long get_register_number(const char* arg);
 int get_arg(char *arg, const char *buffer);
 
 void delete_comments(char *comment_ptr);
+
+int get_tag(const uint64_t tag, const int tags_now, uint64_t *hash_tags);
 
 int main(const int argc, const char *argv[]) {
     if (argc <= 1) {
@@ -46,33 +66,40 @@ int main(const int argc, const char *argv[]) {
     long code[MAX_CODE_LEN] = {};
     long *code_ptr = code;
     
-    char command_str[MAX_COMMAND_LEN + 1] = {};
+    char command_str[MAX_TAG_LEN + 1] = {};
     int command_len = 0;
     
     long tags[MAX_TAGS] = {};
     for (size_t i = 0; i < MAX_TAGS; i++) {
         tags[i] = -1;
     }
-    
-    long tags2fix[MAX_CODE_LEN * 2] = {};
-    for (size_t i = 0; i < MAX_CODE_LEN * 2; i++) {
-        tags2fix[i] = -1;
-    }
-    
+
+    uint64_t hash_tags[MAX_TAGS] = {}; 
+
+    int tags_now = 0;
+    uint64_t hash_tag_now = 0;
     while (sscanf(buffer, "%s%n", command_str, &command_len) == 1) {
-        printf("command_now: %s len: %d\n", command_str, command_len);
+        DEBUG printf("command_now: %-8s hash: %-24lu len: %d\n", command_str, getHash8char(command_str), command_len);
 
         buffer += command_len;
 
         if (*command_str == ':') {
-            long tag = strtol(command_str + 1, NULL, 10);            
-            if (tags[tag] != -1) {
-                printfError("duplicate tag\n");
-                return -1;
-            }
-            tags[tag] = code_ptr - code;
+            hash_tags[tags_now] = getHashString(command_str + 1);
+            int tag = get_tag(hash_tags[tags_now], tags_now, hash_tags);
+            if (tag != -1) {
+                if (tags[tag] != -1) {
+                    printfError("duplicate tag\n");
+                    return -1;
+                } else {
+                    tags[tag] = code_ptr - code;
+                }
+            } else {
+                tags[tags_now] = code_ptr - code;
+                tags_now++;
+            } 
+            memset(command_str, '\0', MAX_COMMAND_LEN);
             continue;
-        } 
+        }
 
         command_t command = parse_command(command_str);
 
@@ -81,22 +108,8 @@ int main(const int argc, const char *argv[]) {
         long arg_l = 0;
 
         switch (command) {
-            case HLT:
-                *code_ptr = (long)command;
-                code_ptr++;
-                break;
 	        case PUSH:
-	            shift = get_arg(arg, buffer);
-	            if (shift == -1) {
-	                printfError("no arg push: %s\n", arg);
-	                return 1;
-	            }
-	            buffer += shift;
-
-	            if (*buffer != '\n') {
-	                printfError("too much args push\n");
-	                return 1;
-	            }
+	            GET_ARG("PUSH"); 
 
 	            if (isalpha(*arg)) {
 	                *code_ptr = (long)PUSHR;
@@ -118,17 +131,7 @@ int main(const int argc, const char *argv[]) {
 	            break;
 	        case PUSHR:
 	        case POP:
-	            shift = get_arg(arg, buffer);
-	            if (shift == -1) {
-	                printfError("no arg pushr/pop: %s\n", arg);
-	                return 1;
-	            }
-	            buffer += shift;
-
-	            if (*buffer != '\n') {
-	                printfError("too much args pushr/pop\n");
-	                return 1;
-	            }
+	            GET_ARG("PUSHR/POP"); 
 
 	            if (isalpha(*arg)) {
 	                *code_ptr = (long)command;
@@ -150,10 +153,10 @@ int main(const int argc, const char *argv[]) {
 	        case MUL:
 	        case DIV:
 	        case OUT:
-	            if (*buffer != '\n') {
-	                printfError("arg at add/mul/div/out\n");
-	                return 1;
-	            }
+	        case RET:
+	        case HLT:
+	            NO_ARG("ADD/SUB/MUL/DIV/OUT/RET");
+
 	            buffer++;
 	            *code_ptr = (long)command;
 	            code_ptr++;
@@ -165,47 +168,53 @@ int main(const int argc, const char *argv[]) {
 	        case JBE:
 	        case JE:
             case JNE:
-	            shift = get_arg(arg, buffer);
-	            if (shift == -1) {
-	                printfError("no arg JMP: %s\n", arg);
-	                return 1;
-	            }
-	            buffer += shift;
-
-	            if (*buffer != '\n') {
-	                printfError("too much args JMP\n");
-	                return 1;
-	            }
-
-	            arg_l = strtol(arg, NULL, 10);
-	            if (arg_l == -1) {
-	                printfError("unknown register %s\n", arg);
-	                return 1;
-	            }
+            case CALL:
+                GET_ARG("JMPS"); 
+                
+                hash_tag_now = getHashString(arg);
+	            arg_l = get_tag(hash_tag_now, tags_now, hash_tags);
 
 	            *code_ptr = (long)command;
 	            code_ptr++;
 
-	            if (tags[arg_l] != -1) {
-	                *code_ptr = tags[arg_l];
+	            if (arg_l != -1) {
+	                *code_ptr = arg_l;
 	            } else {
-	                *code_ptr = 0;
-	                tags2fix[code_ptr - code] = arg_l;
+	                *code_ptr = tags_now;
+	                hash_tags[tags_now] = getHashString(arg);
+	                tags_now++;
 	            }
+
 	            code_ptr++;
 	           break;
+	        case UNKNOWN_COMMAND:
 	        default:
 	            printfError("unknown command\n");
 	            return 1;
         }
         
-        for (size_t i = 0; i < MAX_COMMAND_LEN + 1; i++) command_str[i] = 0;
+        memset(command_str, '\0', MAX_COMMAND_LEN);
     }
     printfOK("end first compile\n");
 
-    for (size_t i = 0; i < code_ptr - code; i++) {
-        if (tags2fix[i] != -1) {
-            code[i] = tags[tags2fix[i]];
+    for (long *i = code; i < code_ptr; i++) {
+        // printf("i: %ld\n", *i);
+        switch (*i) {
+            case JMP:
+	        case JA:
+	        case JB:
+	        case JAE:
+	        case JBE:
+	        case JE:
+            case JNE:
+            case CALL:
+                *(i + 1) = tags[*(i + 1)];
+	        case PUSH:
+	        case PUSHR:
+	        case POP:
+	            i++;
+	        default:
+	            break;
         }
     }
 
@@ -213,29 +222,43 @@ int main(const int argc, const char *argv[]) {
         fprintf(file, "%c", ((char*)code)[i]);
     }
 
-    for (size_t i = 0; i < code_ptr - code; i++) {
-        printf("%ld ", code[i]);
+    DEBUG {
+        for (size_t i = 0; i < code_ptr - code; i++) {
+            printf("%ld ", code[i]);
+        }
+        printf("\n");
     }
-    printf("\n");
-
     printfOK("end second compile\n");
-
 
     free(real_buffer);
     fclose(file);
     return 0;
 }
 
+int get_tag(const uint64_t tag, const int tags_now, uint64_t *hash_tags) {
+    assert(tag);
+    assert(hash_tags);
+
+    for (int i = 0; i < tags_now; i++) {
+        if (tag == hash_tags[i]) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 command_t parse_command(const char *command_now) {
     assert(command_now);
 
+    uint64_t hash = getHash8char(command_now);
+
     for (int i = 0; i < N_COMMANDS; i++) {
-        if (!strncmp(command_now, str_spu_commands[i], len_spu_commands[i])) {
+        if (hash == hash_spu_commands[i]) {
             return list_spu_commands[i];
         }
     }
-    printfError("unknown command: %10s\n", command_now);
-    return HLT;
+    return UNKNOWN_COMMAND;
 }
 
 long get_register_number(const char* arg) {
@@ -260,11 +283,15 @@ int get_arg(char *arg, const char *buffer) {
 }
 
 void delete_comments(char *comment_ptr) {
+    assert(comment_ptr);
+
     while (*comment_ptr != '\0') {
-        while (*comment_ptr != ';') comment_ptr++;
+        while (*comment_ptr != ';'  && *comment_ptr != '\0') comment_ptr++;
         while (*comment_ptr != '\n' && *comment_ptr != '\0') {
             *comment_ptr = ' ';
             comment_ptr++;
         }
     }
 }
+
+

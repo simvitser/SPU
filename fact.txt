@@ -1,0 +1,24 @@
+PUSH 10
+CALL fact
+OUT
+HLT
+
+:fact
+    POP AX
+    PUSH AX
+    PUSH 1
+    JE fact_1
+
+    PUSH AX
+    POP AX
+    PUSH AX
+    PUSH AX
+    PUSH 1
+    SUB
+    CALL fact
+    MUL
+    RET
+
+    :fact_1
+    PUSH AX
+    RET

@@ -37,6 +37,9 @@ double randDouble();
 
 uint64_t getHash(const void *buffer, const size_t size);
 
+uint64_t getHashString(const char *s);
+
+uint64_t getHash8char(const char *s);
 
 typedef struct {
     char *str;

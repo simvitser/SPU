@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include "common.h"
 
@@ -28,6 +29,24 @@ uint64_t getHash(const void *buffer, const size_t size) {
         ans ^= (uint64_t)buf[i];
         ans *= 33;
     }
+    return ans;
+}
+
+uint64_t getHashString(const char *s) {
+    assert(s);
+
+    uint64_t ans = 5381;
+    while (*s != '\0') {
+        ans ^= (uint64_t)(*s);
+        ans *= 33;
+        s++;
+    }
+    return ans;
+}
+
+uint64_t getHash8char(const char *s) {
+    uint64_t ans = 0;
+    memcpy(&ans, s, 8);
     return ans;
 }
 

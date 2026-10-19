@@ -1,15 +1,35 @@
 PUSH 10
-POP AX ; goydaaaaaaaa kdfdf
-:1
-    PUSH AX ; and here
+
+CALL fib
+OUT
+HLT
+
+
+:fib
+    POP AX
     PUSH AX
-    MUL
-    OUT
+
+    PUSH AX
+    PUSH 2
+    JBE fib1
+    
     PUSH AX
     PUSH 1
     SUB
+    CALL fib
+    
+    POP BX
     POP AX
-    PUSH 0
+    PUSH BX
     PUSH AX
-    JB 1
-HLT
+    PUSH 2
+    SUB
+    CALL fib
+    ADD
+    RET
+
+    :fib1
+    POP BX
+    PUSH 1
+    RET
+

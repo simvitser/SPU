@@ -22,6 +22,8 @@ static void spuJAE   (spu_t *spu);
 static void spuJBE   (spu_t *spu);
 static void spuJE    (spu_t *spu);
 static void spuJNE   (spu_t *spu);
+static void spuCALL  (spu_t *spu);
+static void spuRET   (spu_t *spu);
 
 ErrorStatusSpu spuCtor(spu_t *spu, const char *filename) {
     assert(spu);
@@ -34,6 +36,8 @@ ErrorStatusSpu spuCtor(spu_t *spu, const char *filename) {
     if (size == FS_ERROR) return SPU_MEMORY_ERROR;
 
     spu->code = (long*)buffer;
+
+    stackCtor(&spu->ret_stack);
     stackCtor(&spu->stack);
     
     return SPU_OK;
@@ -42,53 +46,37 @@ ErrorStatusSpu spuCtor(spu_t *spu, const char *filename) {
 ErrorStatusSpu spuRun(spu_t *spu) {
     assert(spu);
     
-    while (1) {
+    while (1) { 
         command_t command_now = (command_t)spu->code[spu->ip];
         spu->ip++; //TODO: arg через макрос через доступ по индексу а ip++ через += 2 после выполнения
+         
         switch (command_now) {
             case HLT:
                 return SPU_OK;
                 break;
-	        case PUSH:  spuPUSH  (spu);  break; // moveip(2);
-	        case PUSHR: spuPUSHR (spu);  break;
-            case POP:   spuPOP   (spu);  break;
-            case ADD:   spuADD   (spu);  break;
-            case SUB:
-                spuSUB(spu);
-                break;
-            case MUL:
-                spuMUL(spu);
-                break;
-            case DIV:
-                spuDIV(spu);
-                break;
-	        case OUT:
-	            spuOUT(spu);
-	            break;
-	        case JMP:
-	            spuJMP(spu);
-	            break;
-	        case JA:
-                spuJA(spu);
-                break;
-	        case JB:
-	            spuJB(spu);
-	            break;
-	        case JAE:
-	            spuJAE(spu);
-	            break;
-	        case JBE:
-	            spuJBE(spu);
-	            break;
-	        case JE:
-	            spuJE(spu);
-	            break;
-	        case JNE:
-	            spuJNE(spu);
-	            break;
-	        default:
-	            return SPU_UNKNOWN_COMMAND;
+	        case PUSH:  spuPUSH  (spu); break; // moveip(2);
+            case PUSHR: spuPUSHR (spu); break;
+            case POP:   spuPOP   (spu); break;
+            case ADD:   spuADD   (spu); break;
+            case SUB:   spuSUB   (spu); break;
+            case MUL:   spuMUL   (spu); break;
+            case DIV:   spuDIV   (spu); break;
+            case OUT:   spuOUT   (spu); break;
+            case JMP:   spuJMP   (spu); break;
+            case JA:    spuJA    (spu); break;
+            case JB:    spuJB    (spu); break;
+            case JAE:   spuJAE   (spu); break;
+            case JBE:   spuJBE   (spu); break;
+            case JE:    spuJE    (spu); break;
+            case JNE:   spuJNE   (spu); break;
+            case CALL:  spuCALL  (spu); break;
+            case RET:   spuRET   (spu); break;
+            default:
+                return SPU_UNKNOWN_COMMAND;
         }
+
+        // printf("command_now: %s\n", str_spu_commands[command_now]);
+        // stackPrint(&spu->stack);
     }
     return SPU_OK;
 }
@@ -97,6 +85,7 @@ void spuDtor(spu_t *spu) {
     assert(spu);
 
     stackDtor(&spu->stack);
+    stackDtor(&spu->ret_stack);
     free(spu->code);
 }
 
@@ -225,3 +214,13 @@ static void spuJNE(spu_t *spu) {
     }
 }
 
+static void spuCALL(spu_t *spu) {
+    assert(spu);
+
+    stackPush(&spu->ret_stack, spu->ip + 1);
+    spu->ip = spu->code[spu->ip];
+}
+
+static void spuRET(spu_t *spu) {
+    spu->ip = stackPop(&spu->ret_stack);
+}

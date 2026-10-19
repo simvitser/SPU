@@ -7,6 +7,7 @@
 typedef struct {
     long* code;
     stack_t stack;
+    stack_t ret_stack;
     long registers[4];
     long ip;
 } spu_t;

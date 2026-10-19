@@ -1,0 +1,28 @@
+PUSH 10
+
+CALL fib
+OUT
+HLT
+
+
+:fib
+    POP AX
+    PUSH 1
+    PUSH 1
+
+    :for
+        POP BX
+        POP CX
+        PUSH BX
+        PUSH BX
+        PUSH CX
+        ADD
+        PUSH AX
+        PUSH 1
+        SUB
+        POP AX
+        PUSH AX
+        PUSH 2
+        JA for
+    RET
+
