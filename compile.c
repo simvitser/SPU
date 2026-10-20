@@ -24,10 +24,15 @@ buffer += shift; \
 NO_ARG(CMD);
 
 #define NO_ARG(CMD) \
+while (*buffer == ' ') buffer++; \
 if (*buffer != '\n') { \
     printfError("too much args at " CMD "\n"); \
     return 1; \
 }
+
+#define PUT_ARG(code_ptr, arg) \
+memcpy(code_ptr, &arg, sizeof(arg)); \
+code_ptr += sizeof(arg);
 
 command_t parse_command(const char *command_now);
 
@@ -37,7 +42,7 @@ int get_arg(char *arg, const char *buffer);
 
 void delete_comments(char *comment_ptr);
 
-int get_tag(const uint64_t tag, const int tags_now, uint64_t *hash_tags);
+int get_tag(const uint64_t tag, const long tags_now, uint64_t *hash_tags);
 
 int main(const int argc, const char *argv[]) {
     if (argc <= 1) {
@@ -63,8 +68,8 @@ int main(const int argc, const char *argv[]) {
     }
 
     printfOK("start compile\n");
-    long code[MAX_CODE_LEN] = {};
-    long *code_ptr = code;
+    uint8_t code[MAX_CODE_LEN] = {};
+    uint8_t *code_ptr = code;
     
     char command_str[MAX_TAG_LEN + 1] = {};
     int command_len = 0;
@@ -76,7 +81,7 @@ int main(const int argc, const char *argv[]) {
 
     uint64_t hash_tags[MAX_TAGS] = {}; 
 
-    int tags_now = 0;
+    long tags_now = 0;
     uint64_t hash_tag_now = 0;
     while (sscanf(buffer, "%s%n", command_str, &command_len) == 1) {
         DEBUG printf("command_now: %-8s hash: %-24lu len: %d\n", command_str, getHash8char(command_str), command_len);
@@ -108,46 +113,39 @@ int main(const int argc, const char *argv[]) {
         long arg_l = 0;
 
         switch (command) {
-	        case PUSH:
-	            GET_ARG("PUSH"); 
-
-	            if (isalpha(*arg)) {
-	                *code_ptr = (long)PUSHR;
-	                code_ptr++;
-	                arg_l = get_register_number(arg);
-	                if (arg_l == -1) {
-	                    printfError("unknown register %s\n", arg);
-	                    return 1;
-	                }
-	                *code_ptr = arg_l;
-	                code_ptr++;
-	            } else {
-	                *code_ptr = (long)PUSH;
-	                code_ptr++;
-	                arg_l = strtol(arg, NULL, 10);
-	                *code_ptr = arg_l;
-	                code_ptr++;
-	            }
-	            break;
-	        case PUSHR:
 	        case POP:
-	            GET_ARG("PUSHR/POP"); 
+	        case PUSH:
+	        {
+	            GET_ARG("PUSH");
 
-	            if (isalpha(*arg)) {
-	                *code_ptr = (long)command;
+	            char *arg_ptr = arg;
+
+                if (*arg_ptr == '[') {
+                    command = (command_t)(command | RAM_MASK);
+                    arg_ptr++;
+                }
+
+                if (isalpha(*arg_ptr)) {
+                    command = (command_t)(command | REG_MASK);
+
+                    *code_ptr = (uint8_t)command;
 	                code_ptr++;
-	                arg_l = get_register_number(arg);
+
+	                arg_l = get_register_number(arg_ptr);
 	                if (arg_l == -1) {
-	                    printfError("unknown register %s\n", arg);
+	                    printfError("unknown register %s\n", arg_ptr);
 	                    return 1;
 	                }
-	                *code_ptr = arg_l;
+                } else {
+                    *code_ptr = (uint8_t)command;
 	                code_ptr++;
-	            } else {
-	                printfError("register should start with letter, got: %s\n", arg);
-	                return 1;
-	            }
+
+	                arg_l = strtol(arg_ptr, NULL, 10);
+                }
+                
+	            PUT_ARG(code_ptr, arg_l);
 	            break;
+	        }
 	        case ADD:
 	        case SUB:
 	        case MUL:
@@ -155,10 +153,12 @@ int main(const int argc, const char *argv[]) {
 	        case OUT:
 	        case RET:
 	        case HLT:
+	        case VOUT:
+	        case IN:
 	            NO_ARG("ADD/SUB/MUL/DIV/OUT/RET");
 
 	            buffer++;
-	            *code_ptr = (long)command;
+	            *code_ptr = (uint8_t)command;
 	            code_ptr++;
 	            break;
 	        case JMP:
@@ -170,22 +170,21 @@ int main(const int argc, const char *argv[]) {
             case JNE:
             case CALL:
                 GET_ARG("JMPS"); 
-                
+
                 hash_tag_now = getHashString(arg);
 	            arg_l = get_tag(hash_tag_now, tags_now, hash_tags);
 
-	            *code_ptr = (long)command;
+	            *code_ptr = (uint8_t)command;
 	            code_ptr++;
 
 	            if (arg_l != -1) {
-	                *code_ptr = arg_l;
+	                PUT_ARG(code_ptr, arg_l);
 	            } else {
-	                *code_ptr = tags_now;
+	                PUT_ARG(code_ptr, tags_now);
 	                hash_tags[tags_now] = getHashString(arg);
 	                tags_now++;
 	            }
 
-	            code_ptr++;
 	           break;
 	        case UNKNOWN_COMMAND:
 	        default:
@@ -197,9 +196,11 @@ int main(const int argc, const char *argv[]) {
     }
     printfOK("end first compile\n");
 
-    for (long *i = code; i < code_ptr; i++) {
+    for (uint8_t *i = code; i < code_ptr; i++) {
         // printf("i: %ld\n", *i);
-        switch (*i) {
+
+        long tag2fix = 0;
+        switch ((*i) & OPCODE_MASK) {
             case JMP:
 	        case JA:
 	        case JB:
@@ -208,21 +209,29 @@ int main(const int argc, const char *argv[]) {
 	        case JE:
             case JNE:
             case CALL:
-                *(i + 1) = tags[*(i + 1)];
+                i++;
+                memcpy(&tag2fix, i, sizeof(tags[0]));
+                if (tags[tag2fix] == -1) {
+                    printfError("undefined tag index %ld\n", tag2fix);
+                    return 1;
+                }
+                PUT_ARG(i, tags[tag2fix]);
+                i--;
+                break;
 	        case PUSH:
-	        case PUSHR:
 	        case POP:
-	            i++;
+	            i += sizeof(long);
+	            break;
 	        default:
 	            break;
         }
     }
  
-    fwrite(code, sizeof(long), code_ptr - code, file);
+    fwrite(code, sizeof(uint8_t), code_ptr - code, file);
 
     DEBUG {
         for (size_t i = 0; i < code_ptr - code; i++) {
-            printf("%ld ", code[i]);
+            printf("%d ", code[i]);
         }
         printf("\n");
     }
@@ -233,7 +242,7 @@ int main(const int argc, const char *argv[]) {
     return 0;
 }
 
-int get_tag(const uint64_t tag, const int tags_now, uint64_t *hash_tags) {
+int get_tag(const uint64_t tag, const long tags_now, uint64_t *hash_tags) {
     assert(tag);
     assert(hash_tags);
 
@@ -262,11 +271,19 @@ command_t parse_command(const char *command_now) {
 long get_register_number(const char* arg) {
     assert(arg);
 
-    if (!strncmp(arg, "AX", 2)) return 0;
-    if (!strncmp(arg, "BX", 2)) return 1;
-    if (!strncmp(arg, "CX", 2)) return 2;
-    if (!strncmp(arg, "DX", 2)) return 3;
+    if (arg[1] == 'X') return arg[0] - 'A';
     return -1;
+
+    // if (!strncmp(arg, "AX", 2)) return 0;
+    // if (!strncmp(arg, "BX", 2)) return 1;
+    // if (!strncmp(arg, "CX", 2)) return 2;
+    // if (!strncmp(arg, "DX", 2)) return 3;
+    // if (!strncmp(arg, "EX", 2)) return 4;
+    // if (!strncmp(arg, "FX", 2)) return 5;
+    // if (!strncmp(arg, "GX", 2)) return 6;
+    // if (!strncmp(arg, "HX", 2)) return 7;
+    //
+    // return -1;
 }
 
 int get_arg(char *arg, const char *buffer) {

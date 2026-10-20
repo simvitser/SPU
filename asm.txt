@@ -1,35 +1,132 @@
-PUSH 10
+CALL INABC
+CALL INABC
+CALL INABC
 
-CALL fib
+POP CX
+POP BX
+POP AX
+
+CALL countD
+PUSH DX
 OUT
-HLT
+
+PUSH DX
+PUSH 0
+JE d0
+
+PUSH DX
+PUSH 0
+JA da
+
+PUSH DX
+PUSH 0
+JB db
 
 
-:fib
-    POP AX
-    PUSH AX
-
-    PUSH AX
-    PUSH 2
-    JBE fib1
-    
-    PUSH AX
-    PUSH 1
-    SUB
-    CALL fib
-    
-    POP BX
-    POP AX
+:d0
+    PUSH 900009
+    OUT
     PUSH BX
+    PUSH -10000
+    MUL
     PUSH AX
     PUSH 2
+    MUL
+    DIV
+    OUT
+    HLT
+
+:da
+    CALL sqrtD
+    PUSH EX
+    OUT
+    PUSH 123456
+    OUT
+
+    PUSH BX
+    PUSH -100
+    MUL
+
+    PUSH EX
+    PUSH 100
+    MUL
     SUB
-    CALL fib
+
+    PUSH AX
+    PUSH 2
+    MUL
+
+    DIV
+    OUT
+
+    PUSH BX
+    PUSH -100
+    MUL
+
+    PUSH EX
+    PUSH 100
+    MUL
     ADD
+
+    PUSH AX
+    PUSH 2
+    MUL
+
+    DIV
+    OUT
+
+    HLT
+
+
+:db
+    PUSH -777
+    OUT
+
+    HLT
+
+
+
+
+:countD
+    PUSH BX
+    PUSH BX
+    MUL
+    PUSH 4
+    PUSH AX
+    PUSH CX
+    MUL
+    MUL
+    SUB
+    PUSH 10000
+    DIV
+    POP DX
     RET
 
-    :fib1
-    POP BX
-    PUSH 1
+:INABC
+    IN ; coef
+    PUSH 10000
+    MUL
+    RET
+
+:sqrtD
+    PUSH 0
+    POP EX
+    
+    :for
+        PUSH EX
+        PUSH 100
+        ADD
+        POP EX
+
+        PUSH EX
+        PUSH EX
+        MUL
+        PUSH DX
+
+        JB for
+    PUSH EX
+    PUSH 100
+    MUL
+    POP EX
     RET
 

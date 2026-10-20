@@ -1,0 +1,34 @@
+IN
+
+CALL fib
+OUT
+HLT
+
+:fib
+    POP AX
+    PUSH AX
+
+    PUSH AX
+    PUSH 2
+    JBE fib1
+    
+    PUSH AX
+    PUSH 1
+    SUB
+    CALL fib
+    
+    POP BX
+    POP AX
+    PUSH BX
+    PUSH AX
+    PUSH 2
+    SUB
+    CALL fib
+    ADD
+    RET
+
+    :fib1
+    POP BX
+    PUSH 1
+    RET
+

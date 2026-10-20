@@ -5,11 +5,12 @@
 #include "stack.h"
 
 typedef struct {
-    long* code;
+    uint8_t* code;
     stack_t stack;
     stack_t ret_stack;
-    long registers[4];
+    long registers[8];
     long ip;
+    long mem[100];
 } spu_t;
 
 typedef enum {

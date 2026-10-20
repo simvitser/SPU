@@ -1,4 +1,4 @@
-PUSH 10
+IN
 
 CALL fib
 OUT
